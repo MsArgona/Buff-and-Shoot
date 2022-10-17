@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.AI;
 
 public class SharpBall : MonoBehaviourPun
 {
@@ -13,10 +14,19 @@ public class SharpBall : MonoBehaviourPun
 
     private bool onPos;
     private Transform randPos;
+    private NavMeshAgent agent;
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
 
     private void Start()
     {
         randPos = GetRandomPos();
+
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     private void Update()
@@ -24,22 +34,22 @@ public class SharpBall : MonoBehaviourPun
         if (!photonView.IsMine)
             return;
 
+        Move();
+    }
+
+    private void Move()
+    {
+        onPos = (transform.position.x == randPos.position.x) ? true : false;
+
         if (!onPos) //не дошел до точки
         {
-            Move();
+            agent.SetDestination(randPos.position);
         }
         else //ƒошел до точки - выбираем новую
         {
             randPos = GetRandomPos();
             onPos = false;
         }
-    }
-
-    private void Move()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, randPos.position, speed * Time.deltaTime);
-
-        onPos = (transform.position == randPos.position) ? true : false;
     }
 
     private Transform GetRandomPos()

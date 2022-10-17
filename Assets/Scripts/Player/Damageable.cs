@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Damageable : MonoBehaviour
 {
     [SerializeField] private float health = 10f;
     private float curHealth;
 
+    [HideInInspector] public bool IsDead { get; private set; }
+    [HideInInspector] public Action onDead;
+
     private void Start()
     {
+        IsDead = false;
         curHealth = health;
     }
 
@@ -18,7 +23,8 @@ public class Damageable : MonoBehaviour
 
         if (curHealth <= 0)
         {
-            Debug.Log("You died");
+            IsDead = true;
+            onDead();
         }
     }
 }

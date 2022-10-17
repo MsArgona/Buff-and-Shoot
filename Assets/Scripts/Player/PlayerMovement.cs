@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPun
 {
     [Header("Body parts")]
     [Tooltip("Only the upper body of the character")]
-    [SerializeField] private GameObject[] topPlayerParts;
+    [SerializeField] private GameObject head;
+    [SerializeField] private GameObject leftArm;
+    [SerializeField] private GameObject rightArm;
+    [SerializeField] private GameObject body;
     [SerializeField] private GameObject leftLeg; //дальн€€ нога
     [SerializeField] private GameObject rightLeg; //ближн€€ нога
     [SerializeField] private Tail tail;
@@ -31,8 +35,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D leftLegRB;
     private Rigidbody2D rightLegRB;
 
+    private Damageable damageable;
+
     private void Awake()
     {
+        damageable = GetComponentInChildren<Damageable>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -41,9 +48,23 @@ public class PlayerMovement : MonoBehaviour
     {
         leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
         rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
+
+        damageable.onDead += KillPlyer;
     }
 
-    public void Move()
+    private void Update()
+    {
+        if (!photonView.IsMine) // чтобы не вли€ть на других игроков
+            return;
+
+        if (damageable.IsDead)
+            return;
+
+        Move();
+        Jump();
+    }
+
+    private void Move()
     {
         // ƒвижение персонажа переделать
         if (Input.GetAxisRaw("Horizontal") != 0)
@@ -78,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Jump()
+    private void Jump()
     {
         isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
 
@@ -91,6 +112,16 @@ public class PlayerMovement : MonoBehaviour
                 audioSource.PlayOneShot(jumpClip);
             }
         }
+    }
+
+    private void KillPlyer()
+    {
+        animator.SetTrigger("dead");
+
+        head.GetComponent<Balance>().enabled = false;
+        body.GetComponent<Balance>().enabled = false;
+        leftLeg.GetComponent<Balance>().enabled = false;
+        rightLeg.GetComponent<Balance>().enabled = false;
     }
 
     IEnumerator MoveRight(float seconds)
@@ -129,11 +160,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void InverseBodyParts()
     {
-        foreach (var part in topPlayerParts) //весь вверх
-        {
-            InversePart(part);
-        }
-
+        InversePart(head);
+        InversePart(leftArm);
+        InversePart(rightArm);
+        InversePart(body);
         InversePart(leftLeg);
         InversePart(rightLeg);
     }
@@ -142,7 +172,11 @@ public class PlayerMovement : MonoBehaviour
     {
         part.transform.localScale = new Vector3(part.transform.localScale.x * (-1), part.transform.localScale.y, part.transform.localScale.z);
     }
-  
+    private void OnDisable()
+    {
+        damageable.onDead -= KillPlyer;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(playerPos.position, positionRadius);
