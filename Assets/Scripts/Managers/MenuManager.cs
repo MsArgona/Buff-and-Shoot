@@ -59,16 +59,6 @@ public class MenuManager : MonoBehaviourPunCallbacks
     public void JoinRoom(string roomName)
     {
         PhotonNetwork.JoinRoom(roomName);
-
-        ////ошибка, т.к.он смотрит локально, а не на сервере
-        //if (rooms.Exists(x => string.Equals(x, joinInput.text, System.StringComparison.OrdinalIgnoreCase)))
-        //{
-        //    PhotonNetwork.JoinRoom(joinInput.text.ToLower());
-        //}
-        //else
-        //{
-        //    Debug.Log("Комнаты с таким именем НЕ существует");
-        //}
     }
 
     public override void OnJoinedRoom()

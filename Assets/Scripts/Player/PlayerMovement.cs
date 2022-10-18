@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField] private Tail tail;
 
     [Header("Movement")]
+    [SerializeField] private AudioClip dieClip;
+    [SerializeField] private AudioClip moveClip;
     [SerializeField] private float speed = 1.5f;
     [SerializeField] private float stepWait = 0.5f;
     [SerializeField] private float jumpForce = 10f;
@@ -49,7 +51,7 @@ public class PlayerMovement : MonoBehaviourPun
         leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
         rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
 
-        damageable.onDead += KillPlyer;
+        damageable.onDead += KillPlayer;
     }
 
     private void Update()
@@ -114,8 +116,9 @@ public class PlayerMovement : MonoBehaviourPun
         }
     }
 
-    private void KillPlyer()
+    private void KillPlayer()
     {
+        audioSource.PlayOneShot(dieClip);
         animator.SetTrigger("dead");
 
         head.GetComponent<Balance>().enabled = false;
@@ -136,6 +139,12 @@ public class PlayerMovement : MonoBehaviourPun
         rightLegRB.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
         yield return new WaitForSeconds(seconds);
         leftLegRB.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
+    }
+
+    private void PlayWalkSound()
+    {
+        if (isOnGround)
+             audioSource.PlayOneShot(moveClip);
     }
 
     private void TurnBodyToRight()
@@ -174,7 +183,7 @@ public class PlayerMovement : MonoBehaviourPun
     }
     private void OnDisable()
     {
-        damageable.onDead -= KillPlyer;
+        damageable.onDead -= KillPlayer;
     }
 
     private void OnDrawGizmos()

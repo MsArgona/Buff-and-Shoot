@@ -13,6 +13,8 @@ public class SharpBall : MonoBehaviourPun
     [SerializeField] private float speed = 2f;
 
     private bool onPos;
+    private bool canMove;
+
     private Transform randPos;
     private NavMeshAgent agent;
 
@@ -25,6 +27,8 @@ public class SharpBall : MonoBehaviourPun
     {
         randPos = GetRandomPos();
 
+        GameMenuManager.onGameEnd += StopMove;
+
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
@@ -34,8 +38,11 @@ public class SharpBall : MonoBehaviourPun
         if (!photonView.IsMine)
             return;
 
-        Move();
+        if (canMove)
+            Move();
     }
+
+    private void StopMove() => canMove = false;
 
     private void Move()
     {
@@ -57,6 +64,11 @@ public class SharpBall : MonoBehaviourPun
         var index = Random.Range(0, poses.Length - 1);
 
         return poses[index];
+    }
+
+    private void OnDisable()
+    {
+        GameMenuManager.onGameEnd -= StopMove;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
