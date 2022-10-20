@@ -76,14 +76,14 @@ public class PlayerMovement : MonoBehaviourPun
                 animator.SetBool("isRunning", true);
                 animator.SetBool("isRight", true);
                 TurnBodyToRight();
-                StartCoroutine(MoveRight(stepWait));
+              //  StartCoroutine(MoveRight(stepWait));
             }
             else
             {
                 animator.SetBool("isRunning", true);
                 animator.SetBool("isRight", false);
                 TurnBodyToLeft();
-                StartCoroutine(MoveLeft(stepWait));
+                //StartCoroutine(MoveLeft(stepWait));
             }
         }
         else
@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviourPun
 
         if (isOnGround && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)))
         {
-            bodyRb.AddForce(Vector2.up * jumpForce * 100f);
+            // bodyRb.AddForce(Vector2.up * jumpForce * 100f);
 
             if (audioSource != null)
             {
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviourPun
         animator.SetTrigger("dead");
 
         head.GetComponent<Balance>().enabled = false;
-        body.GetComponent<Balance>().enabled = false;
+        // body.GetComponent<Balance>().enabled = false;
         leftLeg.GetComponent<Balance>().enabled = false;
         rightLeg.GetComponent<Balance>().enabled = false;
     }
@@ -144,7 +144,7 @@ public class PlayerMovement : MonoBehaviourPun
     private void PlayWalkSound()
     {
         if (isOnGround)
-             audioSource.PlayOneShot(moveClip);
+            audioSource.PlayOneShot(moveClip);
     }
 
     private void TurnBodyToRight()

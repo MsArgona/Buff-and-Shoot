@@ -25,6 +25,7 @@ public class SharpBall : MonoBehaviourPun
 
     private void Start()
     {
+        canMove = true;
         randPos = GetRandomPos();
 
         GameMenuManager.onGameEnd += StopMove;

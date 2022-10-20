@@ -329,12 +329,24 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1862439467202240061, guid: d4716334ab97a314b8532e5ceb730a7b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.96414
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862439467202240061, guid: d4716334ab97a314b8532e5ceb730a7b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.96414
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862439467202240061, guid: d4716334ab97a314b8532e5ceb730a7b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.96414
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862439467202240061, guid: d4716334ab97a314b8532e5ceb730a7b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.08793616
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: 1862439467202240061, guid: d4716334ab97a314b8532e5ceb730a7b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.101029515
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: 1862439467202240061, guid: d4716334ab97a314b8532e5ceb730a7b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1082,6 +1094,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1192229851}
+    - target: {fileID: 8768402226176692862, guid: d945afb857802a049963ee47838ad969, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8768402227352903206, guid: d945afb857802a049963ee47838ad969, type: 3}
       propertyPath: m_Name
       value: Canvas
