@@ -66,7 +66,7 @@ TextureImporter:
       213: 1160838630045143531
     second: BackgroundLevel1_24
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -87,6 +87,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -125,6 +126,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -176,6 +178,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -640,6 +654,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      BackgroundLevel1_22: -8494324722135900942
+      BackgroundLevel1_6: 6023952848340700100
+      BackgroundLevel1_8: 2177802755023096631
+      BackgroundLevel1_7: 2121399346045835916
+      BackgroundLevel1_5: 7182076929953636502
+      BackgroundLevel1_13: 3703614919136823055
+      BackgroundLevel1_16: 6025654016038623851
+      BackgroundLevel1_11: -1929673010311393534
+      BackgroundLevel1_0: -333027939303893406
+      BackgroundLevel1_19: -4480376344807278080
+      BackgroundLevel1_18: 4783513144994815247
+      BackgroundLevel1_3: -6573616375516721673
+      BackgroundLevel1_9: -4151920256199765709
+      BackgroundLevel1_14: 6901751565423392521
+      BackgroundLevel1_12: 1090058386355312204
+      BackgroundLevel1_4: -7209612008759913768
+      BackgroundLevel1_2: 7798029834157122992
+      BackgroundLevel1_10: -2451629228551092672
+      BackgroundLevel1_1: -3907031223633041109
+      BackgroundLevel1_24: 1160838630045143531
+      BackgroundLevel1_15: -7228536034053233853
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -122,7 +122,8 @@ public class PlayerMovement : MonoBehaviourPun
         animator.SetTrigger("dead");
 
         head.GetComponent<Balance>().enabled = false;
-        // body.GetComponent<Balance>().enabled = false;
+        body.GetComponent<Balance>().enabled = false;
+        body.GetComponent<HingeJoint2D>().enabled = false;
         leftLeg.GetComponent<Balance>().enabled = false;
         rightLeg.GetComponent<Balance>().enabled = false;
     }

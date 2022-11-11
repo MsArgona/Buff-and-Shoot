@@ -15,13 +15,23 @@ public class PlayerController : MonoBehaviourPun, IPlayerController
     private Vector3 _lastPosition;
     private float _currentHorizontalSpeed, _currentVerticalSpeed;
 
+    private Damageable damageable;
+
     private bool _active;
-    void Awake() => Invoke(nameof(Activate), 0.5f);
+    void Awake()
+    {
+        Invoke(nameof(Activate), 0.5f);
+        damageable = GetComponentInChildren<Damageable>();
+    }
     void Activate() => _active = true;
+
 
     private void Update()
     {
         if (!photonView.IsMine) // чтобы не влиять на других игроков
+            return;
+
+        if (damageable.IsDead)
             return;
 
         //Сделать проверку на смерть игрока
