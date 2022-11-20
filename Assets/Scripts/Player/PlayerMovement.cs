@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField] private Rigidbody2D bodyRb;
     private bool isOnGround;
 
+    private PhotonView PV;
+
     private Animator animator;
     private AudioSource audioSource;
 
@@ -41,6 +43,8 @@ public class PlayerMovement : MonoBehaviourPun
 
     private void Awake()
     {
+        PV = GetComponent<PhotonView>();
+
         damageable = GetComponentInChildren<Damageable>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
@@ -48,6 +52,8 @@ public class PlayerMovement : MonoBehaviourPun
 
     private void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
+
         leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
         rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
 
@@ -56,7 +62,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     private void Update()
     {
-        if (!photonView.IsMine) // чтобы не влиять на других игроков
+        if (!PV.IsMine) // чтобы не влиять на других игроков
             return;
 
         if (damageable.IsDead)

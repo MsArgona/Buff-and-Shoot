@@ -19,7 +19,7 @@ public class Tail : MonoBehaviourPun, IPunObservable
 
     [SerializeField] private PhotonView PV;
 
-    private void Start()
+    private void Awake()
     {
         lineRenderer.positionCount = length;
         segmentPoses = new Vector3[length];
@@ -52,9 +52,10 @@ public class Tail : MonoBehaviourPun, IPunObservable
         {
             stream.SendNext(length);
 
-            segmentPoses[0] = targetDir.position;
+            stream.SendNext(targetDir.position);
 
-            stream.SendNext(segmentPoses[0]);
+            //segmentPoses[0] = targetDir.position;
+            // stream.SendNext(segmentPoses[0]);
 
             for (int i = 1; i < segmentPoses.Length; i++)
             {
@@ -62,6 +63,7 @@ public class Tail : MonoBehaviourPun, IPunObservable
 
                 stream.SendNext(segmentPoses[i]);
             }
+
             lineRenderer.SetPositions(segmentPoses);
         }
         else if (stream.IsReading)
@@ -74,6 +76,7 @@ public class Tail : MonoBehaviourPun, IPunObservable
             {
                 segmentPoses[i] = (Vector3)stream.ReceiveNext();
             }
+
             lineRenderer.SetPositions(segmentPoses);
         }
     }

@@ -16,19 +16,25 @@ public class PlayerController : MonoBehaviourPun, IPlayerController
     private float _currentHorizontalSpeed, _currentVerticalSpeed;
 
     private Damageable damageable;
+    private PhotonView PV;
 
     private bool _active;
     void Awake()
     {
         Invoke(nameof(Activate), 0.5f);
         damageable = GetComponentInChildren<Damageable>();
+        PV = GetComponent<PhotonView>();
     }
-    void Activate() => _active = true;
+    private void Start()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
 
+    void Activate() => _active = true;
 
     private void Update()
     {
-        if (!photonView.IsMine) // чтобы не влиять на других игроков
+        if (!PV.IsMine) // чтобы не влиять на других игроков
             return;
 
         if (damageable.IsDead)
