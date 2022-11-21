@@ -2106,7 +2106,7 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 0
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 2
+    InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 1
     ExtrapolateOption: 0
@@ -2495,6 +2495,14 @@ PrefabInstance:
     - target: {fileID: 4242706649631221282, guid: 3ab4e82b703bee8419f65c2a1c0a1b70, type: 3}
       propertyPath: length
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365547428175055804, guid: 3ab4e82b703bee8419f65c2a1c0a1b70, type: 3}
+      propertyPath: m_ScaleModel.InterpolateOption
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365547428175055804, guid: 3ab4e82b703bee8419f65c2a1c0a1b70, type: 3}
+      propertyPath: m_PositionModel.TeleportIfDistanceGreaterThan
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7911956690708860047, guid: 3ab4e82b703bee8419f65c2a1c0a1b70, type: 3}
       propertyPath: sceneViewId

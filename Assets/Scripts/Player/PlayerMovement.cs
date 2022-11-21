@@ -52,8 +52,6 @@ public class PlayerMovement : MonoBehaviourPun
 
     private void Start()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
-
         leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
         rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
 

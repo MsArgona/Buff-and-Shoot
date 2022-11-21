@@ -25,10 +25,6 @@ public class PlayerController : MonoBehaviourPun, IPlayerController
         damageable = GetComponentInChildren<Damageable>();
         PV = GetComponent<PhotonView>();
     }
-    private void Start()
-    {
-        PhotonNetwork.AutomaticallySyncScene = true;
-    }
 
     void Activate() => _active = true;
 
@@ -39,8 +35,6 @@ public class PlayerController : MonoBehaviourPun, IPlayerController
 
         if (damageable.IsDead)
             return;
-
-        //Сделать проверку на смерть игрока
 
         if (!_active) return;
         // Calculate velocity
